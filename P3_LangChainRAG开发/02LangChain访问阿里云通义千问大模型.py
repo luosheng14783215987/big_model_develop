@@ -1,10 +1,8 @@
 # langchain_community
 from langchain_community.chat_models import ChatTongyi
 
-llm = ChatTongyi(
-    model="qwen-max",
-    dashscope_api_key="sk-bab541fb2b874b70abff4a4a1d53861f",
-)
+# 密钥从环境变量 DASHSCOPE_API_KEY 读取（勿在代码中写死）
+llm = ChatTongyi(model="qwen-max")
 
 res = llm.invoke("Why do parrots talk?")
 print(res.content)

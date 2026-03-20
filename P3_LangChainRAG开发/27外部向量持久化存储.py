@@ -7,7 +7,7 @@ from langchain_community.document_loaders import CSVLoader
 
 vector_store = Chroma(
     collection_name="test",     # 当前向量存储起个名字，类似数据库的表名称
-    embedding_function=DashScopeEmbeddings(dashscope_api_key="sk-bab541fb2b874b70abff4a4a1d53861f"),       # 嵌入模型
+    embedding_function=DashScopeEmbeddings(),       # 嵌入模型；密钥从环境变量 DASHSCOPE_API_KEY 读取
     persist_directory="./chroma_db"     # 指定数据存放的文件夹
 )
 #

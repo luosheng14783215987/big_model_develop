@@ -23,8 +23,7 @@ print(prompt_text)
 
 
 # 得到模型对象, qwen3-max就是聊天模型
-model = ChatTongyi(model="qwen3-max",
-                   dashscope_api_key="sk-bab541fb2b874b70abff4a4a1d53861f")
+model = ChatTongyi(model="qwen3-max")
 # 调用.format方法注入信息即可
 
 print(model.invoke(input=prompt_text).content)

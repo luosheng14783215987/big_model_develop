@@ -1,13 +1,8 @@
 from openai import OpenAI
-from dotenv import load_dotenv
 import os
 
-load_dotenv()
-
-client = OpenAI(
-    api_key=os.getenv("DASHSCOPE_API_KEY"),
-    base_url=os.getenv("DASHSCOPE_BASE_URL")
-)
+# 密钥由环境变量 OPENAI_API_KEY 提供（OpenAI SDK 约定）；BASE_URL 为 DashScope 兼容地址
+client = OpenAI(base_url=os.getenv("DASHSCOPE_BASE_URL"))
 
 messages = [{"role": "user", "content": "你是谁"}]
 completion = client.chat.completions.create(

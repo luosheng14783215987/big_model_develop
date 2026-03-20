@@ -1,16 +1,10 @@
 import os
 
-from dotenv import load_dotenv
 from openai import OpenAI
 
 # 1. 获取client对象，OpenAI类对象
 
-load_dotenv()
-
-client = OpenAI(
-    api_key=os.getenv("DASHSCOPE_API_KEY"),
-    base_url=os.getenv("DASHSCOPE_BASE_URL")
-)
+client = OpenAI(base_url=os.getenv("DASHSCOPE_BASE_URL"))
 
 messages = [{"role": "user", "content": "你是谁"}]
 

@@ -23,26 +23,40 @@ python -m venv .venv
 .venv\Scripts\activate
 
 pip install -U pip
-pip install openai python-dotenv langchain langchain-community langchain-core langchain-chroma chromadb pypdf
+pip install openai langchain langchain-community langchain-core langchain-chroma chromadb pypdf
 ```
 
 > 说明：`P3_LangChainRAG开发` 中使用了 Chroma 向量库持久化（会生成 `chroma_db` 目录），以及若干文档加载器（如 `CSVLoader`、`PyPDFLoader`）。
 
-## 配置环境变量（强烈建议）
+## 配置环境变量（系统/外部环境）
 
-`P1_OpenAI库的基础使用`、`P2_提示词优化` 目录下存在 `.env` 用于读取密钥与接口地址（请勿提交到 Git）。
+本仓库示例通过 **操作系统环境变量** 读取配置（不使用 `.env` 文件）。请在运行前自行设置，例如：
 
-常见变量（以 DashScope/通义千问为例）：
+| 变量名 | 说明 |
+|--------|------|
+| `OPENAI_API_KEY` | **P1 / P2**：官方 `openai` SDK 默认读取的密钥（请填 DashScope/百炼 的 API Key，与控制台密钥相同） |
+| `DASHSCOPE_BASE_URL` | **P1 / P2**：兼容模式地址，如 `https://dashscope.aliyuncs.com/compatible-mode/v1` |
+| `DASHSCOPE_API_KEY` | **P3 / P4**：LangChain 的 `ChatTongyi`、`DashScopeEmbeddings` 等默认读取的密钥 |
 
-```env
-# API Key（示例名：DASHSCOPE_API_KEY）
-DASHSCOPE_API_KEY=your_key_here
+> 建议：将 `OPENAI_API_KEY` 与 `DASHSCOPE_API_KEY` 设为**同一串 API Key**，这样 P1～P4 无需改代码即可跑通。
 
-# OpenAI SDK 兼容的 base_url（示例名：DASHSCOPE_BASE_URL）
-DASHSCOPE_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
+**Windows（当前会话）示例：**
+
+```powershell
+$env:OPENAI_API_KEY = "你的Key"
+$env:DASHSCOPE_API_KEY = "你的Key"
+$env:DASHSCOPE_BASE_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1"
 ```
 
-> 注意：仓库中个别示例脚本可能包含硬编码 key。**强烈建议你在上传 Git 前将其改为从环境变量读取**，避免泄漏。
+**Linux / macOS 示例：**
+
+```bash
+export OPENAI_API_KEY="你的Key"
+export DASHSCOPE_API_KEY="你的Key"
+export DASHSCOPE_BASE_URL="https://dashscope.aliyuncs.com/compatible-mode/v1"
+```
+
+> P1/P2 的 `OpenAI(...)` **不显式传入 `api_key`**，由 SDK 从 `OPENAI_API_KEY` 读取；P3/P4 的通义组件从 `DASHSCOPE_API_KEY` 读取（代码中不写 `dashscope_api_key` 参数）。
 
 ## 运行示例
 
@@ -61,6 +75,6 @@ python "27外部向量持久化存储.py"
 
 ## Git 提交建议
 
-- 不要提交：`.env`、`.venv`、`__pycache__`、IDE 工程文件（如 `.idea/`）、本地向量库持久化目录（如 `chroma_db/`）
+- 不要提交：`.venv`、`__pycache__`、IDE 工程文件（如 `.idea/`）、本地向量库持久化目录（如 `chroma_db/`）、以及任何含密钥的本地配置文件（若你自行使用 `.env` 等，勿提交）
 - 如果你希望让别人一键运行，建议后续补充 `requirements.txt` 或 `pyproject.toml`
 

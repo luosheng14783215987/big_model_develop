@@ -1,13 +1,8 @@
-from dotenv import load_dotenv
 from openai import OpenAI
 import os
 
-load_dotenv()
 # 1. 获取client对象，OpenAI类对象
-client = OpenAI(
-    api_key=os.getenv("DASHSCOPE_API_KEY"),
-    base_url=os.getenv("DASHSCOPE_BASE_URL")
-)
+client = OpenAI(base_url=os.getenv("DASHSCOPE_BASE_URL"))
 
 # 2. 调用模型  等于提供了上下文
 response = client.chat.completions.create(

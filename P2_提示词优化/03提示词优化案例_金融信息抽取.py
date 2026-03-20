@@ -1,15 +1,9 @@
+import json
 import os
 
-from dotenv import load_dotenv
 from openai import OpenAI
-import json
 
-load_dotenv()
-
-client = OpenAI(
-    api_key=os.getenv("DASHSCOPE_API_KEY"),
-    base_url=os.getenv("DASHSCOPE_BASE_URL")
-)
+client = OpenAI(base_url=os.getenv("DASHSCOPE_BASE_URL"))
 
 schema = ['日期', '股票名称', '开盘价', '收盘价', '成交量']
 examples_data = [       # 示例数据

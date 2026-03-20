@@ -13,7 +13,6 @@ from langchain_core.messages import HumanMessage
 
 llm = ChatTongyi(
     model="qwen-max",
-    dashscope_api_key="sk-bab541fb2b874b70abff4a4a1d53861f",
     streaming=True
 )
 

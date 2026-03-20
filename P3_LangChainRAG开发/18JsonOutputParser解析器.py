@@ -7,8 +7,7 @@ str_parser = StrOutputParser()
 json_parser = JsonOutputParser()
 
 # 模型创建
-model = ChatTongyi(model="qwen3-max",
-                   dashscope_api_key="sk-bab541fb2b874b70abff4a4a1d53861f")
+model = ChatTongyi(model="qwen3-max")
 
 # 第一个提示词模板
 first_prompt = PromptTemplate.from_template(
